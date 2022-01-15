@@ -1,5 +1,7 @@
-require('dotenv').config();
-const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
+import dotenv from 'dotenv';
+dotenv.config();
+
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
 import {fileTypeFromStream} from 'file-type';
 
 const s3Client = new S3Client({ region: process.env.AWS_REGION });
