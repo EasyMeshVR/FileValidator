@@ -2,7 +2,7 @@ const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
 const { fromStream } = require('file-type');
 
 class FileValidator {
-	static get STL_FILE_TYPE() { return '.stl' };
+	static get STL_FILE_TYPE() { return 'stl' };
 
 	static #s3Client = new S3Client({ 
 		region: process.env.AWS_REGION 
