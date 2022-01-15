@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Lambda function that is triggered by S3 upload events to validate that files are in the ASCII STL format.",
   "main": "index.js",
+  "type": "module" ,
   "scripts": {
     "test": "jest"
   },
