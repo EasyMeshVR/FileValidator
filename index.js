@@ -31,7 +31,9 @@ exports.handler = async (event) => {
     const records = event.Records;
 
     try {
-        records.forEach((record) => await handleRecord(record));
+        for (const record of records) {
+            await handleRecord(record);
+        }
     } catch (error) {
         console.log(error);
         response.statusCode = 500;
