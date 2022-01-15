@@ -1,5 +1,5 @@
 const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
-const { fileTypeFromStream } = require('file-type');
+const { fromStream } = require('file-type');
 
 class FileValidator {
 	static #s3Client = new S3Client({ 
@@ -16,7 +16,8 @@ class FileValidator {
 		});
 
 		const commandResult = await this.#s3Client.send(getObjectCommand);
-		const fileType = await fileTypeFromStream(commandResult.Body);
+		console.log(typeof(commandResult.Body));
+		const fileType = await fromStream(commandResult.Body);
 
 		console.log(fileType);
 
