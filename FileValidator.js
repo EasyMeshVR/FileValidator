@@ -2,6 +2,8 @@ const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
 const { fromStream } = require('file-type');
 
 class FileValidator {
+	static get STL_FILE_TYPE() { return ".stl" };
+
 	static #s3Client = new S3Client({ 
 		region: process.env.AWS_REGION 
 	});
@@ -16,12 +18,18 @@ class FileValidator {
 		});
 
 		const commandResult = await this.#s3Client.send(getObjectCommand);
-		console.log(typeof(commandResult.Body));
 		const fileType = await fromStream(commandResult.Body);
 
 		console.log(fileType);
 
-		// TODO: if not valid fileType delete the object
+		if (!fileType || !fileType.ext || fileType.ext !== this.STL_FILE_TYPE()) {
+			// Delete object from S3
+			console.log('Invalid file type uploaded');
+			console.log(fileType);
+		}
+		else {
+			console.log('File is valid ASCII stl');
+		}
 	};
 }
 
