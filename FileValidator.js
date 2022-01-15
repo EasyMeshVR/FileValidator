@@ -1,7 +1,7 @@
-import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
-import { fileTypeFromStream } from "file-type"; 'file-type';
+const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
+const { fileTypeFromStream } = require('file-type');
 
-export class FileValidator {
+class FileValidator {
 	static #s3Client = new S3Client({ 
 		region: process.env.AWS_REGION 
 	});
@@ -23,3 +23,5 @@ export class FileValidator {
 		// TODO: if not valid fileType delete the object
 	};
 }
+
+module.exports = FileValidator;
