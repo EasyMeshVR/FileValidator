@@ -2,8 +2,6 @@ require('dotenv').config();
 const FileValidator = require('./FileValidator.js');
 
 exports.handler = async (event) => {
-    console.log(event);
-
     const response = {
         statusCode: 200,
     };
